@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:c="COADE"
+           targetNamespace="COADE"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <!--
+    Refined practical schema profile for BM_CII_INPUT.XML.
+    This is intentionally permissive so the XML can carry the sentinel
+    values required by the sample-to-CII mapping.
+  -->
+
+  <xs:simpleType name="numText">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="textOpt">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="CaseType">
+    <xs:attribute name="NUM" type="c:numText" use="required"/>
+    <xs:attribute name="HOT_ALLOW" type="c:numText" use="optional"/>
+    <xs:attribute name="HOT_SY" type="c:numText" use="optional"/>
+    <xs:attribute name="HOT_SU" type="c:numText" use="optional"/>
+    <xs:attribute name="CYC_RED_FACTOR" type="c:numText" use="optional"/>
+    <xs:attribute name="BUTTWELDCYCLES" type="c:textOpt" use="optional"/>
+    <xs:attribute name="BUTTWELDSTRESS" type="c:numText" use="optional"/>
+    <xs:attribute name="FILLETWELDCYCLES" type="c:numText" use="optional"/>
+    <xs:attribute name="FILLETWELDSTRESS" type="c:numText" use="optional"/>
+    <xs:attribute name="APP_P_OPE_ALL_REDUCTION" type="c:numText" use="optional"/>
+    <xs:attribute name="CLASSWCYCLES" type="c:numText" use="optional"/>
+    <xs:attribute name="CLASSWSTRESS" type="c:numText" use="optional"/>
+    <xs:attribute name="CLASSGCYCLES" type="c:numText" use="optional"/>
+    <xs:attribute name="CLASSGSTRESS" type="c:numText" use="optional"/>
+    <xs:attribute name="CLASSFCYCLES" type="c:numText" use="optional"/>
+    <xs:attribute name="CLASSFSTRESS" type="c:numText" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="AllowableStressType">
+    <xs:sequence>
+      <xs:element name="CASE" type="c:CaseType" minOccurs="0" maxOccurs="9"/>
+    </xs:sequence>
+    <xs:attribute name="ALLOWBL_STRESS_INDICATOR" type="c:textOpt" use="optional"/>
+    <xs:attribute name="DESIGN_FACTOR" type="c:textOpt" use="optional"/>
+    <xs:attribute name="HOOP_STRESS_FACTOR" type="c:numText" use="optional"/>
+    <xs:attribute name="COLD_ALLOW" type="c:numText" use="optional"/>
+    <xs:attribute name="EFF" type="c:numText" use="optional"/>
+    <xs:attribute name="SY" type="c:numText" use="optional"/>
+    <xs:attribute name="SU" type="c:numText" use="optional"/>
+    <xs:attribute name="FAC" type="c:numText" use="optional"/>
+    <xs:attribute name="PMAX" type="c:numText" use="optional"/>
+    <xs:attribute name="PIPING_CODE" type="c:numText" use="optional"/>
+    <xs:attribute name="SUPP_RQR" type="c:textOpt" use="optional"/>
+    <xs:attribute name="MAT_LP" type="c:textOpt" use="optional"/>
+    <xs:attribute name="ALPHA_H" type="c:numText" use="optional"/>
+    <xs:attribute name="ALPHA_FAB" type="c:numText" use="optional"/>
+    <xs:attribute name="BURST_OPE" type="c:textOpt" use="optional"/>
+    <xs:attribute name="BURST_TEST" type="c:textOpt" use="optional"/>
+    <xs:attribute name="COLLAPSE" type="c:textOpt" use="optional"/>
+    <xs:attribute name="PROPBUCK" type="c:textOpt" use="optional"/>
+    <xs:attribute name="LCC" type="c:textOpt" use="optional"/>
+    <xs:attribute name="DCC" type="c:textOpt" use="optional"/>
+    <xs:attribute name="GAMMA_C" type="c:numText" use="optional"/>
+    <xs:attribute name="R" type="c:numText" use="optional"/>
+    <xs:attribute name="ALPHA_GW" type="c:numText" use="optional"/>
+    <xs:attribute name="DESIGN_LT" type="c:numText" use="optional"/>
+    <xs:attribute name="CHEMICAL_RES" type="c:numText" use="optional"/>
+    <xs:attribute name="CURVE_RADIUS" type="c:numText" use="optional"/>
+    <xs:attribute name="BURIED" type="c:textOpt" use="optional"/>
+    <xs:attribute name="EHB" type="c:numText" use="optional"/>
+    <xs:attribute name="DF" type="c:numText" use="optional"/>
+    <xs:attribute name="YD" type="c:numText" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="RigidType">
+    <xs:attribute name="WEIGHT" type="c:numText" use="required"/>
+    <xs:attribute name="TYPE" type="c:textOpt" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="RestraintType">
+    <xs:attribute name="NUM" type="c:numText" use="required"/>
+    <xs:attribute name="NODE" type="c:numText" use="required"/>
+    <xs:attribute name="TYPE" type="c:numText" use="required"/>
+    <xs:attribute name="STIFFNESS" type="c:numText" use="optional"/>
+    <xs:attribute name="GAP" type="c:numText" use="optional"/>
+    <xs:attribute name="FRIC_COEF" type="c:numText" use="optional"/>
+    <xs:attribute name="CNODE" type="c:numText" use="optional"/>
+    <xs:attribute name="XCOSINE" type="c:numText" use="optional"/>
+    <xs:attribute name="YCOSINE" type="c:numText" use="optional"/>
+    <xs:attribute name="ZCOSINE" type="c:numText" use="optional"/>
+    <xs:attribute name="TAG" type="c:textOpt" use="optional"/>
+    <xs:attribute name="GUID" type="c:textOpt" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="BendType">
+    <xs:attribute name="RADIUS" type="c:numText" use="required"/>
+    <xs:attribute name="TYPE" type="c:numText" use="optional"/>
+    <xs:attribute name="ANGLE1" type="c:numText" use="optional"/>
+    <xs:attribute name="NODE1" type="c:numText" use="optional"/>
+    <xs:attribute name="ANGLE2" type="c:numText" use="optional"/>
+    <xs:attribute name="NODE2" type="c:numText" use="optional"/>
+    <xs:attribute name="ANGLE3" type="c:numText" use="optional"/>
+    <xs:attribute name="NODE3" type="c:numText" use="optional"/>
+    <xs:attribute name="NUM_MITER" type="c:numText" use="optional"/>
+    <xs:attribute name="FITTINGTHICKNESS" type="c:numText" use="optional"/>
+    <xs:attribute name="KFACTOR" type="c:numText" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="SifType">
+    <xs:attribute name="SIF_NUM" type="c:numText" use="required"/>
+    <xs:attribute name="NODE" type="c:numText" use="required"/>
+    <xs:attribute name="TYPE" type="c:numText" use="required"/>
+    <xs:attribute name="SIF_IN" type="c:numText" use="optional"/>
+    <xs:attribute name="SIF_OUT" type="c:numText" use="optional"/>
+    <xs:attribute name="SIF_TORSION" type="c:numText" use="optional"/>
+    <xs:attribute name="SIF_AXIAL" type="c:numText" use="optional"/>
+    <xs:attribute name="SIF_PRESSURE" type="c:numText" use="optional"/>
+    <xs:attribute name="STRESSINDEX_Iin" type="c:numText" use="optional"/>
+    <xs:attribute name="STRESSINDEX_Iout" type="c:numText" use="optional"/>
+    <xs:attribute name="STRESSINDEX_It" type="c:numText" use="optional"/>
+    <xs:attribute name="STRESSINDEX_Ia" type="c:numText" use="optional"/>
+    <xs:attribute name="STRESSINDEX_Ipr" type="c:numText" use="optional"/>
+    <xs:attribute name="WELD_D" type="c:numText" use="optional"/>
+    <xs:attribute name="FILLET" type="c:numText" use="optional"/>
+    <xs:attribute name="PAD_THK" type="c:numText" use="optional"/>
+    <xs:attribute name="FTG_RO" type="c:numText" use="optional"/>
+    <xs:attribute name="CROTCH" type="c:numText" use="optional"/>
+    <xs:attribute name="WELD_ID" type="c:numText" use="optional"/>
+    <xs:attribute name="B1" type="c:numText" use="optional"/>
+    <xs:attribute name="B2" type="c:numText" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="HangerType">
+    <xs:attribute name="NODE" type="c:numText" use="required"/>
+    <xs:attribute name="CNODE" type="c:numText" use="optional"/>
+    <xs:attribute name="CONST_EFF_LOAD" type="c:numText" use="optional"/>
+    <xs:attribute name="LOAD_VAR" type="c:numText" use="optional"/>
+    <xs:attribute name="RIGID_SUP" type="c:numText" use="optional"/>
+    <xs:attribute name="AVAIL_SPACE" type="c:numText" use="optional"/>
+    <xs:attribute name="COLD_LOAD" type="c:numText" use="optional"/>
+    <xs:attribute name="HOT_LOAD" type="c:numText" use="optional"/>
+    <xs:attribute name="MAX_TRAVEL" type="c:numText" use="optional"/>
+    <xs:attribute name="MULTI_LC" type="c:textOpt" use="optional"/>
+    <xs:attribute name="FREEANCHOR1" type="c:numText" use="optional"/>
+    <xs:attribute name="FREEANCHOR2" type="c:numText" use="optional"/>
+    <xs:attribute name="DOFTYPE1" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUM_HGR" type="c:numText" use="optional"/>
+    <xs:attribute name="HGR_TABLE" type="c:textOpt" use="optional"/>
+    <xs:attribute name="SHORT_RANGE" type="c:textOpt" use="optional"/>
+    <xs:attribute name="TAG" type="c:textOpt" use="optional"/>
+    <xs:attribute name="GUID" type="c:textOpt" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="UnitItemType">
+    <xs:attribute name="LABEL" type="c:textOpt" use="optional"/>
+    <xs:attribute name="FACTOR" type="c:numText" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="UnitsType">
+    <xs:sequence>
+      <xs:element name="LENGTH" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="FORCE" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="MASS-DYNAMICS" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="MOMENT-INPUT" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="MOMENT-OUTPUT" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="STRESS" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="TEMP" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="PRESSURE" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="EMOD" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="PDENS" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="IDENS" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="FDENS" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="TRANS_STIFF" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="ROTL_STIFF" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="UNIF_LOAD" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="G_LOAD" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="WIND_LOAD" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="ELEVATION" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="COMPOUND_LENGTH" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="DIAMETER" type="c:UnitItemType" minOccurs="0"/>
+      <xs:element name="THICKNESS" type="c:UnitItemType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PipingElementType">
+    <xs:sequence>
+      <xs:element name="RIGID" type="c:RigidType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="RESTRAINT" type="c:RestraintType" minOccurs="0" maxOccurs="6"/>
+      <xs:element name="ALLOWABLESTRESS" type="c:AllowableStressType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="BEND" type="c:BendType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="SIF" type="c:SifType" minOccurs="0" maxOccurs="2"/>
+      <xs:element name="HANGER" type="c:HangerType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+
+    <xs:attribute name="FROM_NODE" type="c:numText" use="required"/>
+    <xs:attribute name="TO_NODE" type="c:numText" use="required"/>
+    <xs:attribute name="DELTA_X" type="c:numText" use="required"/>
+    <xs:attribute name="DELTA_Y" type="c:numText" use="required"/>
+    <xs:attribute name="DELTA_Z" type="c:numText" use="required"/>
+    <xs:attribute name="DIAMETER" type="c:numText" use="required"/>
+    <xs:attribute name="WALL_THICK" type="c:numText" use="required"/>
+    <xs:attribute name="INSUL_THICK" type="c:numText" use="required"/>
+    <xs:attribute name="CORR_ALLOW" type="c:numText" use="required"/>
+
+    <xs:attribute name="TEMP_EXP_C1" type="c:numText" use="required"/>
+    <xs:attribute name="TEMP_EXP_C2" type="c:numText" use="required"/>
+    <xs:attribute name="TEMP_EXP_C3" type="c:numText" use="required"/>
+    <xs:attribute name="TEMP_EXP_C4" type="c:numText" use="required"/>
+    <xs:attribute name="TEMP_EXP_C5" type="c:numText" use="required"/>
+    <xs:attribute name="TEMP_EXP_C6" type="c:numText" use="required"/>
+    <xs:attribute name="TEMP_EXP_C7" type="c:numText" use="required"/>
+    <xs:attribute name="TEMP_EXP_C8" type="c:numText" use="required"/>
+    <xs:attribute name="TEMP_EXP_C9" type="c:numText" use="required"/>
+
+    <xs:attribute name="PRESSURE1" type="c:numText" use="required"/>
+    <xs:attribute name="PRESSURE2" type="c:numText" use="required"/>
+    <xs:attribute name="PRESSURE3" type="c:numText" use="required"/>
+    <xs:attribute name="PRESSURE4" type="c:numText" use="required"/>
+    <xs:attribute name="PRESSURE5" type="c:numText" use="required"/>
+    <xs:attribute name="PRESSURE6" type="c:numText" use="required"/>
+    <xs:attribute name="PRESSURE7" type="c:numText" use="required"/>
+    <xs:attribute name="PRESSURE8" type="c:numText" use="required"/>
+    <xs:attribute name="PRESSURE9" type="c:numText" use="required"/>
+
+    <xs:attribute name="HYDRO_PRESSURE" type="c:numText" use="required"/>
+    <xs:attribute name="MODULUS" type="c:numText" use="required"/>
+    <xs:attribute name="HOT_MOD1" type="c:numText" use="required"/>
+    <xs:attribute name="HOT_MOD2" type="c:numText" use="required"/>
+    <xs:attribute name="HOT_MOD3" type="c:numText" use="required"/>
+    <xs:attribute name="HOT_MOD4" type="c:numText" use="required"/>
+    <xs:attribute name="HOT_MOD5" type="c:numText" use="required"/>
+    <xs:attribute name="HOT_MOD6" type="c:numText" use="required"/>
+    <xs:attribute name="HOT_MOD7" type="c:numText" use="required"/>
+    <xs:attribute name="HOT_MOD8" type="c:numText" use="required"/>
+    <xs:attribute name="HOT_MOD9" type="c:numText" use="required"/>
+
+    <xs:attribute name="POISSONS" type="c:numText" use="required"/>
+    <xs:attribute name="PIPE_DENSITY" type="c:numText" use="required"/>
+    <xs:attribute name="INSUL_DENSITY" type="c:numText" use="required"/>
+    <xs:attribute name="FLUID_DENSITY" type="c:numText" use="required"/>
+    <xs:attribute name="REFRACTORY_DENSITY" type="c:numText" use="required"/>
+    <xs:attribute name="REFRACTORY_THK" type="c:numText" use="required"/>
+    <xs:attribute name="CLADDING_DEN" type="c:numText" use="required"/>
+    <xs:attribute name="CLADDING_THK" type="c:numText" use="required"/>
+    <xs:attribute name="INSUL_CLAD_UNIT_WEIGHT" type="c:numText" use="required"/>
+
+    <xs:attribute name="MATERIAL_NUM" type="c:numText" use="required"/>
+    <xs:attribute name="MATERIAL_NAME" type="c:textOpt" use="required"/>
+    <xs:attribute name="MILL_TOL_PLUS" type="c:numText" use="required"/>
+    <xs:attribute name="MILL_TOL_MINUS" type="c:numText" use="required"/>
+    <xs:attribute name="SEAM_WELD" type="c:numText" use="required"/>
+    <xs:attribute name="NAME" type="c:textOpt" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="PipingModelType">
+    <xs:sequence>
+      <xs:element name="PIPINGELEMENT" type="c:PipingElementType" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="UNITS" type="c:UnitsType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+
+    <xs:attribute name="JOBNAME" type="c:textOpt" use="required"/>
+    <xs:attribute name="TIME" type="c:textOpt" use="required"/>
+    <xs:attribute name="ISSUE_NO" type="c:textOpt" use="optional"/>
+
+    <xs:attribute name="NUMELT" type="c:textOpt" use="required"/>
+    <xs:attribute name="NUMNOZ" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NOHGRS" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUMBEND" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUMRIGID" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUMEXPJNT" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUMREST" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUMFORCMNT" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUMUNFLOAD" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUMWIND" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUMELEOFF" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUMALLOW" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NUMISECT" type="c:textOpt" use="optional"/>
+
+    <xs:attribute name="NORTH_Z" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NORTH_Y" type="c:textOpt" use="optional"/>
+    <xs:attribute name="NORTH_X" type="c:textOpt" use="optional"/>
+  </xs:complexType>
+
+  <xs:element name="CAESARII">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="PIPINGMODEL" type="c:PipingModelType"/>
+      </xs:sequence>
+      <xs:attribute name="VERSION" type="c:textOpt" use="required"/>
+      <xs:attribute name="XML_TYPE" type="c:textOpt" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
