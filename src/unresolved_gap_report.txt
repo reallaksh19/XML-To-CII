@@ -1,0 +1,5 @@
+# Unresolved Gap Report (Agent 3)
+
+1. NODENAME: XML contains `TAG="PS-456"` at node 205. However, target `BM_CII.CII` has `PS-123` in `#$ NODENAME`. Golden file mismatch or external source gap.
+2. MISCEL_1: XML has exactly one `HANGER` under node 205 with `LOAD_VAR="25.0"`. `BM_CII.CII` has a complex `#$ MISCEL_1` section with `106.000` arrays and other data. Exact mapping for the entire section is unresolved.
+3. COORDS: XML lacks direct `COORDS` values matching `10    23227.576     3257.150   -19800.000` found in `BM_CII.CII`. Proven external-source gap.
