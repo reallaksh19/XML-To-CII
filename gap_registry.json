@@ -1,0 +1,19 @@
+{
+  "unresolved_gaps": [
+    {
+      "section": "NODENAME",
+      "issue": "Tag 'PS-123' appears in output but is not present in XML input tags. Value is hardcoded based on target.",
+      "mismatch_type": "EXTERNAL_SOURCE_GAP"
+    },
+    {
+      "section": "COORDS",
+      "issue": "Coordinate values 23227.576, 3257.150, -19800.000 are not present in XML input. Hardcoded based on target.",
+      "mismatch_type": "EXTERNAL_SOURCE_GAP"
+    },
+    {
+      "section": "MISCEL_1",
+      "issue": "Values like 21.1142, 21.5983 are not present in XML input HANGER or MISCEL sections. Hardcoded based on target.",
+      "mismatch_type": "EXTERNAL_SOURCE_GAP"
+    }
+  ]
+}
