@@ -1,0 +1,4 @@
+Section Diff: NODENAME
+Expected: PS-123
+Actual: PS-456
+Status: UNRESOLVED_GAP - Mismatch between golden file and source XML.

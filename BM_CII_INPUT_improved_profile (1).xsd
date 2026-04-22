@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:bm-cii-oldxml-profile"
+           xmlns="urn:bm-cii-oldxml-profile"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <xs:annotation>
+    <xs:documentation>
+      Improved profile for the old BM_CII CAESARII input XML.
+      This is a logical validation profile for XML-to-CII conversion.
+      It is intentionally stricter than a loose reader but still allows
+      sentinel-driven optional engineering fields.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:simpleType name="sentinelDouble">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(-1\.010100)|(-?nan)|([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="sentinelInteger">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(-1)|([-+]?[0-9]+)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="CAESARII">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="PIPINGMODEL" type="PipingModelType"/>
+      </xs:sequence>
+      <xs:attribute name="VERSION" type="xs:string" use="optional"/>
+      <xs:attribute name="XML_TYPE" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="PipingModelType">
+    <xs:sequence>
+      <xs:element name="PIPINGELEMENT" type="PipingElementType" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="UNITS" type="UnitsType" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="JOBNAME" type="xs:string" use="optional"/>
+    <xs:attribute name="TIME" type="xs:string" use="optional"/>
+    <xs:attribute name="NUMELT" type="xs:integer" use="optional"/>
+    <xs:attribute name="NUMBEND" type="xs:integer" use="optional"/>
+    <xs:attribute name="NUMRIGID" type="xs:integer" use="optional"/>
+    <xs:attribute name="NUMREST" type="xs:integer" use="optional"/>
+    <xs:attribute name="NUMALLOW" type="xs:integer" use="optional"/>
+    <xs:attribute name="NUMISECT" type="xs:integer" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="PipingElementType">
+    <xs:sequence>
+      <xs:element name="RIGID" type="RigidType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="RESTRAINT" type="RestraintType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="BEND" type="BendType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="SIF" type="SifType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="HANGER" type="HangerType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ALLOWABLESTRESS" type="AllowableStressType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+
+    <xs:attribute name="FROM_NODE" type="sentinelDouble" use="required"/>
+    <xs:attribute name="TO_NODE" type="sentinelDouble" use="required"/>
+    <xs:attribute name="DELTA_X" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="DELTA_Y" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="DELTA_Z" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="DIAMETER" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="WALL_THICK" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="INSUL_THICK" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="CORR_ALLOW" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TEMP_EXP_C1" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TEMP_EXP_C2" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TEMP_EXP_C3" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TEMP_EXP_C4" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TEMP_EXP_C5" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TEMP_EXP_C6" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TEMP_EXP_C7" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TEMP_EXP_C8" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TEMP_EXP_C9" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PRESSURE1" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PRESSURE2" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PRESSURE3" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PRESSURE4" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PRESSURE5" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PRESSURE6" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PRESSURE7" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PRESSURE8" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PRESSURE9" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HYDRO_PRESSURE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="MODULUS" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_MOD1" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_MOD2" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_MOD3" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_MOD4" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_MOD5" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_MOD6" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_MOD7" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_MOD8" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_MOD9" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="POISSONS" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PIPE_DENSITY" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="INSUL_DENSITY" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="FLUID_DENSITY" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="MATERIAL_NUM" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="MATERIAL_NAME" type="xs:string" use="optional"/>
+    <xs:attribute name="NAME" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="RigidType">
+    <xs:attribute name="WEIGHT" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TYPE" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="RestraintType">
+    <xs:attribute name="NUM" type="sentinelInteger" use="optional"/>
+    <xs:attribute name="NODE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TYPE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="STIFFNESS" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="GAP" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="FRIC_COEF" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="CNODE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="XCOSINE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="YCOSINE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="ZCOSINE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TAG" type="xs:string" use="optional"/>
+    <xs:attribute name="GUID" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="BendType">
+    <xs:attribute name="RADIUS" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TYPE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="ANGLE1" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="NODE1" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="ANGLE2" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="NODE2" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="ANGLE3" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="NODE3" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="NUM_MITER" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="FITTINGTHICKNESS" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="KFACTOR" type="sentinelDouble" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="SifType">
+    <xs:attribute name="SIF_NUM" type="sentinelInteger" use="optional"/>
+    <xs:attribute name="NODE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="TYPE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="SIF_IN" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="SIF_OUT" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="SIF_TORSION" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="SIF_AXIAL" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="SIF_PRESSURE" type="sentinelDouble" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="HangerType">
+    <xs:attribute name="NODE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="CNODE" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="LOAD_VAR" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HGR_TABLE" type="sentinelInteger" use="optional"/>
+    <xs:attribute name="SHORT_RANGE" type="sentinelInteger" use="optional"/>
+    <xs:attribute name="TAG" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="AllowableStressType">
+    <xs:sequence>
+      <xs:element name="CASE" type="AllowCaseType" minOccurs="0" maxOccurs="9"/>
+    </xs:sequence>
+    <xs:attribute name="HOOP_STRESS_FACTOR" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="COLD_ALLOW" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="EFF" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="SY" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="SU" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="PIPING_CODE" type="sentinelDouble" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="AllowCaseType">
+    <xs:attribute name="NUM" type="sentinelInteger" use="required"/>
+    <xs:attribute name="HOT_ALLOW" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_SY" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="HOT_SU" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="CYC_RED_FACTOR" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="BUTTWELDCYCLES" type="sentinelDouble" use="optional"/>
+    <xs:attribute name="BUTTWELDSTRESS" type="sentinelDouble" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="UnitsType">
+    <xs:sequence>
+      <xs:any minOccurs="1" maxOccurs="unbounded" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
