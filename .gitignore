@@ -1,0 +1,4 @@
+*.o
+*.mod
+parse_agent1
+canonical_model.json
