@@ -1,4 +1,6 @@
 *.o
 *.mod
 test_harness
-test_output.CII
+test_nodename
+test_miscel_coords
+test_output*.CII
